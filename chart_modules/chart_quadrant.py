@@ -107,7 +107,7 @@ def show_chart_quadrant(df):
     st.markdown("### 📉 Pareto Chart Interpretation")
     st.markdown("""
     The Pareto chart ranks mission-risk pairs by cyber breach rate.  
-    It visually identifies the small number of combinations responsible for the majority of breaches — aligning with the 80/20 rule.
+    It visually identifies the small number of combinations responsible for the majority of breaches — aligning with the 80/20 rule.  
     Focus your risk mitigation efforts here for the highest impact.
     """)
 
