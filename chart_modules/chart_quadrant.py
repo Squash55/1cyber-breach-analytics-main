@@ -42,6 +42,8 @@ st.markdown("This dashboard helps identify cyber breach patterns using rule-base
 st.markdown("### Optional Visual Deep Dive")
 st.markdown("Use the toggle below to reveal an additional quadrant of AI-powered visualizations.")
 
+from chart_modules.chart_quadrant import show_chart_quadrant
+
 if st.checkbox("Show Multi-Chart Visuals"):
     st.success("Quadrant visualizations loaded.")
     show_chart_quadrant(df)
