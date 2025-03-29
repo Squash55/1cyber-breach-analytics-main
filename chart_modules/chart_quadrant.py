@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-
+from chart_modules.chart_quadrant import show_chart_quadrant  # ❌ REMOVE THIS LINE if this file is chart_quadrant.py
 
 
 def generate_data(seed=42, n=400):
@@ -47,15 +47,15 @@ if st.checkbox("Show Multi-Chart Visuals"):
     st.success("Quadrant visualizations loaded.")
     show_chart_quadrant(df)
 
-# Moved chart interpretations outside the checkbox so they always follow the charts they explain
-st.markdown("### 📊 Scatter Plot Interpretation")
-st.markdown("""
-This chart reveals how mission type and cyber risk level jointly affect breach patterns.  
-Each cell's shade reflects the breach proportion, and Chi-Squared flags indicate statistically significant deviations.
-""")
+    # Move chart interpretations inside the conditional so they only show when charts do
+    st.markdown("### 📊 Scatter Plot Interpretation")
+    st.markdown("""
+    This chart reveals how mission type and cyber risk level jointly affect breach patterns.  
+    Each cell's shade reflects the breach proportion, and Chi-Squared flags indicate statistically significant deviations.
+    """)
 
-st.markdown("### 📉 Pareto Chart Interpretation")
-st.markdown("""
-This chart ranks mission-risk pairs by breach rate.  
-Bars with the highest breach likelihood appear first, highlighting priority areas for intervention.
-""")
+    st.markdown("### 📉 Pareto Chart Interpretation")
+    st.markdown("""
+    This chart ranks mission-risk pairs by breach rate.  
+    Bars with the highest breach likelihood appear first, highlighting priority areas for intervention.
+    """)
