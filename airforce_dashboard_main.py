@@ -414,3 +414,11 @@ st.markdown("Use the toggle below to reveal an additional quadrant of AI-powered
 if st.checkbox("Show Multi-Chart Visuals"):
     st.success("Quadrant visualizations loaded.")
     show_chart_quadrant(df)
+
+st.markdown("""
+    #### 📊 Scatter Plot Interpretation
+    This chart reveals how mission type and cyber risk level jointly affect breach patterns. Each cell's shade reflects the breach proportion, and Chi-Squared flags indicate statistically significant deviations.
+    
+    #### 📉 Pareto Chart Interpretation
+    This chart ranks mission-risk pairs by breach rate. Bars with the highest breach likelihood appear first, highlighting priority areas for intervention.
+    """)
