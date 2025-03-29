@@ -1,8 +1,9 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 from chart_modules.chart_quadrant import show_chart_quadrant
+# ✅ Import the main dashboard content
+from chart_modules.main_dashboard import show_main_dashboard  # ← hypothetical import
 
 def generate_data(seed=42, n=400):
     np.random.seed(seed)
@@ -23,6 +24,10 @@ df = st.session_state.df.copy()
 st.title("Air Force Cyber Breach Analysis Dashboard")
 st.markdown("This dashboard helps identify cyber breach patterns using rule-based stats, AI insights, and interactive visuals.")
 
+# ✅ Always show your main visuals
+show_main_dashboard(df)
+
+# ✅ Optional quadrant toggle
 st.markdown("### Optional Visual Deep Dive")
 st.markdown("Use the toggle below to reveal an additional quadrant of AI-powered visualizations.")
 
