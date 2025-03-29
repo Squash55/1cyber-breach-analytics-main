@@ -365,3 +365,11 @@ with st.expander("Q3: How can this dashboard guide real-world decisions?"):
 **A3:** It provides statistical evidence and AI insights to identify breach-prone combinations of mission type and risk level.  
 Leaders can prioritize interventions where risk is most elevated, and analysts can validate their findings against AI-generated suggestions.
 """)
+
+#Optional Visual Deep Dive
+st.markdown("### Optional Visual Deep Dive")
+st.markdown("Use the toggle below to reveal an additional quadrant of AI-powered visualizations.")
+
+if st.checkbox("Show Multi-Chart Visuals"):
+    st.success("Quadrant visualizations loaded.")
+    show_chart_quadrant(df)
