@@ -45,11 +45,13 @@ def show_chart_quadrant(df):
     with col1:
         st.markdown("#### 🌳 Decision Tree: Risk Guidance View")
         fig_tree, ax_tree = plt.subplots(figsize=(5, 4))
-        ax_tree.axis('off')
-        ax_tree.set_title("Decision Tree View")
         ax_tree.text(0.1, 0.5, "Low Risk\n(<=2)", ha='center', va='center', bbox=dict(boxstyle="round", fc="lightblue"))
+        ax_tree.text(0.1, 0.2, "⬅ Few Breaches", ha='center')
         ax_tree.text(0.5, 0.5, "Moderate Risk\n(Level 3)", ha='center', va='center', bbox=dict(boxstyle="round", fc="khaki"))
+        ax_tree.text(0.5, 0.2, "↔ Mixed Results", ha='center')
         ax_tree.text(0.9, 0.5, "High Risk\n(Level 4)", ha='center', va='center', bbox=dict(boxstyle="round", fc="salmon"))
+        ax_tree.text(0.9, 0.2, "➡ Mostly Breaches", ha='center')
+
         st.pyplot(fig_tree)
 
     with col2:
