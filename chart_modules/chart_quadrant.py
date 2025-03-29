@@ -68,15 +68,35 @@ def show_chart_quadrant(df):
         labels = list(pd.unique(sankey_df[['source', 'intermediate', 'target']].values.ravel()))
         label_map = {label: i for i, label in enumerate(labels)}
 
-        links = []
-        for _, row in link_1.iterrows():
-            links.append(dict(source=label_map[row['source']], target=label_map[row['intermediate']], value=row['count']))
-        for _, row in link_2.iterrows():
-            links.append(dict(source=label_map[row['intermediate']], target=label_map[row['target']], value=row['count']))
 
+        # Build link list
+        source_list = []
+        target_list = []
+        value_list = []
+        
+        for _, row in link_1.iterrows():
+            source_list.append(label_map[row['source']])
+            target_list.append(label_map[row['intermediate']])
+            value_list.append(row['count'])
+        
+        for _, row in link_2.iterrows():
+            source_list.append(label_map[row['intermediate']])
+            target_list.append(label_map[row['target']])
+            value_list.append(row['count'])
+        
+        # Sankey diagram
         sankey_fig = go.Figure(data=[go.Sankey(
-            node=dict(pad=15, thickness=20, line=dict(color="black", width=0.5), label=labels),
-            link=links
+            node=dict(
+                pad=15,
+                thickness=20,
+                line=dict(color="black", width=0.5),
+                label=labels
+            ),
+            link=dict(
+                source=source_list,
+                target=target_list,
+                value=value_list
+            )
         )])
         sankey_fig.update_layout(font_size=10)
         st.plotly_chart(sankey_fig, use_container_width=True)
