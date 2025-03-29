@@ -1,7 +1,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-from chart_modules.chart_quadrant import show_chart_quadrant
+
 
 
 def generate_data(seed=42, n=400):
