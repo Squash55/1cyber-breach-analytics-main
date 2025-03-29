@@ -109,3 +109,5 @@ def show_chart_quadrant(df):
     This chart ranks mission-risk pairs by breach rate.  
     Bars with the highest breach likelihood appear first, highlighting priority areas for intervention.
     """)
+
+    # Placeholder: future chart interpretations (Radar, Sankey, Tree) could go here too
