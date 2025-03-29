@@ -1,3 +1,4 @@
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -15,41 +16,44 @@ def show_chart_quadrant(df):
     ).reset_index()
 
     with col1:
-        st.markdown("#### 🕸️ Radar Chart")
+        st.markdown("#### 🕸️ Radar Chart: Breach Risk by Mission Type")
         radar_df = df.groupby('Mission Type')['Cyber Breach History'].mean().reset_index()
+        radar_df.columns = ['Mission Type', 'Breach Rate']
         radar_df = pd.concat([radar_df, radar_df.iloc[[0]]])
         fig_radar = go.Figure()
         fig_radar.add_trace(go.Scatterpolar(
-            r=radar_df['Cyber Breach History'],
+            r=radar_df['Breach Rate'],
             theta=radar_df['Mission Type'],
             fill='toself'
         ))
-        fig_radar.update_layout(showlegend=False)
+        fig_radar.update_layout(polar=dict(radialaxis=dict(visible=True, range=[0, 1])), showlegend=False)
         st.plotly_chart(fig_radar, use_container_width=True)
 
     with col2:
-        st.markdown("#### 🔵 Bubble Chart")
+        st.markdown("#### 🔵 Bubble Chart: Breach Rate vs. Mission & Risk")
         fig_bubble = px.scatter(
-            bubble_df, x='Mission Type', y='Cyber Risk Level',
-            size='count', color='breach_rate',
-            color_continuous_scale='RdBu', labels={'breach_rate': 'Breach %'}
+            bubble_df,
+            x='Mission Type',
+            y='Cyber Risk Level',
+            size='count',
+            color='breach_rate',
+            color_continuous_scale='RdBu',
+            labels={'breach_rate': 'Breach %'}
         )
         st.plotly_chart(fig_bubble, use_container_width=True)
 
     with col1:
-        st.markdown("#### 🌳 Decision Tree")
-        fig_tree, ax = plt.subplots(figsize=(5, 3))
-        ax.axis("off")
-        ax.text(0.2, 0.7, "Low Risk
-(<=2)", ha='center', bbox=dict(boxstyle="round", fc="lightblue"))
-        ax.text(0.5, 0.7, "Moderate
-(Level 3)", ha='center', bbox=dict(boxstyle="round", fc="khaki"))
-        ax.text(0.8, 0.7, "High Risk
-(Level 4)", ha='center', bbox=dict(boxstyle="round", fc="salmon"))
+        st.markdown("#### 🌳 Decision Tree: Risk Guidance View")
+        fig_tree, ax_tree = plt.subplots(figsize=(5, 4))
+        ax_tree.axis('off')
+        ax_tree.set_title("Decision Tree View")
+        ax_tree.text(0.1, 0.5, "Low Risk\n(<=2)", ha='center', va='center', bbox=dict(boxstyle="round", fc="lightblue"))
+        ax_tree.text(0.5, 0.5, "Moderate Risk\n(Level 3)", ha='center', va='center', bbox=dict(boxstyle="round", fc="khaki"))
+        ax_tree.text(0.9, 0.5, "High Risk\n(Level 4)", ha='center', va='center', bbox=dict(boxstyle="round", fc="salmon"))
         st.pyplot(fig_tree)
 
     with col2:
-        st.markdown("#### 🔁 Sankey Diagram")
+        st.markdown("#### 🔁 Sankey Diagram: Mission → Risk → Outcome")
         sankey_df = pd.DataFrame({
             'source': df['Mission Type'],
             'intermediate': df['Cyber Risk Level'].astype(str),
@@ -58,6 +62,7 @@ def show_chart_quadrant(df):
 
         link_1 = sankey_df.groupby(['source', 'intermediate']).size().reset_index(name='count')
         link_2 = sankey_df.groupby(['intermediate', 'target']).size().reset_index(name='count')
+
         labels = list(pd.unique(sankey_df[['source', 'intermediate', 'target']].values.ravel()))
         label_map = {label: i for i, label in enumerate(labels)}
 
@@ -67,8 +72,9 @@ def show_chart_quadrant(df):
         for _, row in link_2.iterrows():
             links.append(dict(source=label_map[row['intermediate']], target=label_map[row['target']], value=row['count']))
 
-        fig_sankey = go.Figure(data=[go.Sankey(
+        sankey_fig = go.Figure(data=[go.Sankey(
             node=dict(pad=15, thickness=20, line=dict(color="black", width=0.5), label=labels),
             link=links
         )])
-        st.plotly_chart(fig_sankey, use_container_width=True)
+        sankey_fig.update_layout(font_size=10)
+        st.plotly_chart(sankey_fig, use_container_width=True)
