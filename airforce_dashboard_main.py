@@ -282,8 +282,8 @@ ax.text(4.8, 0.5, legend_text_risk_levels, fontsize=8, verticalalignment='top', 
 st.pyplot(fig)
 st.markdown("""
     #### 📊 Scatter Plot Interpretation
-    This chart reveals how mission type and cyber risk level jointly affect breach patterns. Each cell's shade reflects the breach proportion, and Chi-Squared flags indicate statistically significant deviations.
-# Continue with Pareto chart and interpretations...
+    This chart reveals how mission type and cyber risk level jointly affect breach patterns. Each cell's shade reflects the breach proportion, and Chi-Squared flags indicate statistically significant deviations.)
+
 
 # === CHI-SQUARE TEST EXPLANATION ===
 st.markdown("""
