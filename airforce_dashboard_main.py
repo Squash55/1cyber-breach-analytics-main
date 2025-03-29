@@ -411,7 +411,7 @@ Leaders can prioritize interventions where risk is most elevated, and analysts c
 st.markdown("### Optional Visual Deep Dive")
 st.markdown("Use the toggle below to reveal an additional quadrant of AI-powered visualizations.")
 
-if st.checkbox("Show Multi-Chart Visuals"):
+if st.checkbox("Show Multi-Chart Visuals (Quadrants)"):
     st.success("Quadrant visualizations loaded.")
     show_chart_quadrant(df)
 
