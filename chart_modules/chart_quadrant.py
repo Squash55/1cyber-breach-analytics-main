@@ -110,3 +110,14 @@ def show_chart_quadrant(df):
     Bars with the highest breach likelihood appear first, highlighting priority areas for intervention.
     """)
 
+    st.markdown("### 📊 Sankey Diagram Interpretation")
+    st.markdown("""
+    The Sankey diagram shows the flow from mission types through cyber risk levels to breach outcomes.  
+    It visualizes how mission roles and risk exposures translate to breaches or no breaches.
+    """)
+
+    st.markdown("### 🌳 Decision Tree Interpretation")
+    st.markdown("""
+    The visual guide groups risk levels into Low (≤2), Moderate (3), and High (4).  
+    Low-risk missions show few breaches, moderate risk has mixed results, and high risk mostly results in breaches.
+    """)
